@@ -1,0 +1,20 @@
+services:
+
+  db:
+    image: 'mysql'
+    container_name: 'mysql-database'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'admin_123'
+      MYSQL_DATABASE: 'VA_TEST'
+    ports:
+      - "3306:3306"
+    restart: always
+
+  cache:
+    image: 'redis'
+    restart: always
+    container_name: 'redis-cache'
+    ports:
+      - "6379:6379"
+    command:
+      - redis-server --save 60 1 --loglevel warning      # 60 seconds, 1 key changed (default)
